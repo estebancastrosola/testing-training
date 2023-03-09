@@ -1,0 +1,39 @@
+// Karma configuration file, see link for more information
+// https://karma-runner.github.io/1.0/config/configuration-file.html
+
+module.exports = function (config) {
+  config.set({
+    basePath: '',
+    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    plugins: [
+      require('karma-jasmine'), //this plugin says to karma that jasmine is a framework of testing
+      require('karma-firefox-launcher'), //this plugins let us to open karma in firefox
+      require('karma-jasmine-html-reporter'), //This is the tool that display the results of test in a browser
+      require('karma-coverage'), //plugin uses Istanbul to create a report with metrics of code coverage (more in notions)
+      require('@angular-devkit/build-angular/plugins/karma') //idk, i guess is general
+    ],
+    client: {
+      jasmine: {
+        // you can add configuration options for Jasmine here
+        // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
+        // for example, you can disable the random execution with `random: false`
+        // or set a specific seed with `seed: 4321`
+      },
+      clearContext: false // leave Jasmine Spec Runner output visible in browser
+    },
+    jasmineHtmlReporter: {
+      suppressAll: true // removes the duplicated traces
+    },
+    coverageReporter: {
+      dir: require('path').join(__dirname, './coverage/official-docs'),
+      subdir: '.',
+      reporters: [
+        { type: 'html' },
+        { type: 'text-summary' }
+      ]
+    },
+    reporters: ['progress', 'kjhtml'],
+    browsers: ['Firefox'],
+    restartOnFileChange: true
+  });
+};
