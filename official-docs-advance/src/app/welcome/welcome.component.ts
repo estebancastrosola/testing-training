@@ -7,7 +7,7 @@ import { UserService } from '../model/user.service';
 })
 export class WelcomeComponent implements OnInit {
   welcome = '';
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) { } //Dependecia de un servicio!
 
   ngOnInit(): void {
     this.welcome = this.userService.isLoggedIn ?

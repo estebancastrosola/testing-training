@@ -26,10 +26,10 @@ export class TwainComponent implements OnInit {
     this.getQuote();
   }
 
-  getQuote() {
+  getQuote() { //como podriamos probar esta funcion asincrona? Pues con Spy. Generalmente, en los test no se hacen llamadas a servidores remotos. Se suelen simulan las llamadas
     this.errorMessage = '';
     this.quote = this.twainService.getQuote().pipe(
-      startWith('...'),
+      startWith('...'), //Valor inicial! pone ... como valor antes del primer valor del observable
       catchError( (err: any) => {
         // Wait a turn because errorMessage already set once this turn
         setTimeout(() => this.errorMessage = err.message || err.toString());

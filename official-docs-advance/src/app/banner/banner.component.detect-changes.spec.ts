@@ -1,4 +1,4 @@
-import { ComponentFixtureAutoDetect } from '@angular/core/testing';
+import { ComponentFixtureAutoDetect } from '@angular/core/testing'; //Importamos la libreria que nos permite escuchar los cambios del componente 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BannerComponent } from './banner.component';
@@ -10,9 +10,9 @@ describe('BannerComponent (AutoChangeDetect)', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ BannerComponent ],
+      declarations: [ BannerComponent ], //Ojo con esto! que puede estar en el provider!
       providers: [
-        { provide: ComponentFixtureAutoDetect, useValue: true }
+        { provide: ComponentFixtureAutoDetect, useValue: true } //Activamos la libreria para cambios automaticos
       ]
     });
     fixture = TestBed.createComponent(BannerComponent);
@@ -34,7 +34,11 @@ describe('BannerComponent (AutoChangeDetect)', () => {
 
   it('should display updated title after detectChanges', () => {
     comp.title = 'Test Title';
-    fixture.detectChanges(); // detect changes explicitly
+    fixture.detectChanges(); // detect changes explicitly porque Angular testing no se entera de estos cambios. No obstante, podemos llamar a esto las veces que queramos. No hay dano (harm)
     expect(h1.textContent).toContain(comp.title);
   });
 });
+
+//The first test shows the benefit of automatic change detection.
+
+//The second and third test reveal an important limitation. The Angular testing environment does not know that the test changed the component's title. The ComponentFixtureAutoDetect service responds to asynchronous activities such as promise resolution, timers, and DOM events. But a direct, synchronous update of the component property is invisible. The test must call fixture.detectChanges() manually to trigger another cycle of change detection.

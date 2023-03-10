@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class WelcomeService {
 
-  isLoggedIn = false;
+  isLoggedIn = true;
   user = { name: 'Nombre Del Servicio'};
   
 }

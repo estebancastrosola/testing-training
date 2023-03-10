@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LightSwitchComponent } from './light-switch/light-switch.component';
 import { DashboardHeroComponent } from './dashboard-hero/dashboard-hero.component';
 import { WellcomeComponentComponent } from './wellcome-component/wellcome-component.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { WelcomeComponent } from './welcome/welcome2.component';
 
 @NgModule({
   declarations: [

@@ -28,6 +28,8 @@ describe('HeroDetailComponent', () => {
 
 ///////////////////
 
+
+
 const testHero = getTestHeroes()[0];
 function overrideSetup() {
   class HeroDetailServiceSpy {
@@ -156,7 +158,7 @@ function heroModuleSetup() {
          expect(TestBed.inject(Router).url).toEqual('/heroes/41');
        }));
 
-    it('should convert hero name to Title Case', () => {
+    it('should convert hero name to Title Case', () => { // Se viene aqui (SOLO AQUI) de forma temprana en la guia de angular
       // get the name's input and display elements from the DOM
       const hostElement: HTMLElement = harness.routeNativeElement!;
       const nameInput: HTMLInputElement = hostElement.querySelector('input')!;
@@ -166,10 +168,10 @@ function heroModuleSetup() {
       nameInput.value = 'quick BROWN  fOx';
 
       // Dispatch a DOM event so that Angular learns of input value change.
-      nameInput.dispatchEvent(new Event('input'));
+      nameInput.dispatchEvent(new Event('input')); //Importante esta forma para decirle a Angular que se ha hecho un cambio de un input
 
       // Tell Angular to update the display binding through the title pipe
-      harness.detectChanges();
+      harness.detectChanges(); //Ahora con esto le decimos que haga los data binding
 
       expect(nameDisplay.textContent).toBe('Quick Brown  Fox');
     });

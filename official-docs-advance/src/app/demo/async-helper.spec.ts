@@ -85,7 +85,10 @@ describe('Angular async helper', () => {
   });
 
   describe('fakeAsync', () => {
-    it('should run timeout callback with delay after call tick with millis', fakeAsync(() => {
+    it('should run timeout callback with delay after call tick with millis', fakeAsync(() => { //Otro ejemplo de tick! 
+      //Tick admite milis como parametro. por defecto es 0, pero si tu tienes un timetout de 100 milis por ejemplo, tienes que hacer un tick de 100
+      // tick va siempre dentr de fakeAsync block
+
          let called = false;
          setTimeout(() => {
            called = true;
@@ -94,7 +97,7 @@ describe('Angular async helper', () => {
          expect(called).toBe(true);
        }));
 
-    it('should run new macro task callback with delay after call tick with millis',
+    it('should run new macro task callback with delay after call tick with millis', //Mas usos de tick! aqui vemos como tick para todas los procesos asincronos abiertos
        fakeAsync(() => {
          function nestedTimer(cb: () => any): void {
            setTimeout(() => setTimeout(() => cb()));
@@ -107,7 +110,7 @@ describe('Angular async helper', () => {
          expect(callback).toHaveBeenCalled();
        }));
 
-    it('should not run new macro task callback with delay after call tick with millis',
+    it('should not run new macro task callback with delay after call tick with millis', //pero podemos usar una config para solo parar el current por asi decrilo
        fakeAsync(() => {
          function nestedTimer(cb: () => any): void {
            setTimeout(() => setTimeout(() => cb()));
@@ -122,14 +125,14 @@ describe('Angular async helper', () => {
          expect(callback).toHaveBeenCalled();
        }));
 
-    it('should get Date diff correctly in fakeAsync', fakeAsync(() => {
+    it('should get Date diff correctly in fakeAsync', fakeAsync(() => { //tick como ya hemos visto, simula el paso del tiempo
          const start = Date.now();
          tick(100);
          const end = Date.now();
          expect(end - start).toBe(100);
        }));
 
-    it('should get Date diff correctly in fakeAsync with rxjs scheduler', fakeAsync(() => {
+    it('should get Date diff correctly in fakeAsync with rxjs scheduler', fakeAsync(() => {  //tambien podemos meter rxjs dentro de fakeAsync y usar tick
          // need to add `import 'zone.js/plugins/zone-patch-rxjs-fake-async'
          // to patch rxjs scheduler
          let result = '';
@@ -151,7 +154,7 @@ describe('Angular async helper', () => {
        }));
   });
 
-  describe('use jasmine.clock()', () => {
+  describe('use jasmine.clock()', () => { //aqui por ejemplo se muestra como usar el reloj de jasmine para smular el paso del tiempo
     // need to config __zone_symbol__fakeAsyncPatchLock flag
     // before loading zone.js/testing
     beforeEach(() => {

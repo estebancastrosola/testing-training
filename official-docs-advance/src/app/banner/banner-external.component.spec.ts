@@ -8,10 +8,11 @@ describe('BannerComponent (external files)', () => {
   let h1: HTMLElement;
 
   describe('setup that may fail', () => {
-    beforeEach(async () => {
+    beforeEach(async () => {  //Configuración inicial (puede haber varios beforeEach) 
       await TestBed.configureTestingModule({
         declarations: [ BannerComponent ],
-      }); // missing call to compileComponents()
+      }); // missing call to compileComponents(). No nos hace falta compilar el css y la template. Pone que puede fallar, porque depende de quien arranque los test. 
+      // Esto se completa mas tarde en angular en su seccion correspondiente.
       fixture = TestBed.createComponent(BannerComponent);
     });
 
@@ -24,7 +25,7 @@ describe('BannerComponent (external files)', () => {
     beforeEach(async () => {
       await TestBed.configureTestingModule({
         declarations: [ BannerComponent ],
-      }).compileComponents();  // compile template and css
+      }).compileComponents();  // compile template and css. Lo necesitamos poner porque vamos a consultar el DOM.  PERO LOS TEST DE ANGULAR SIEMPRE LO COMPILAN ASI Q NO SIRVE PARA NADA.
     });
 
     // synchronous beforeEach

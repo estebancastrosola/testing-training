@@ -64,11 +64,17 @@ describe('WelcomeComponent', () => {
     // providers: [ UserService ],  // NO! Don't provide the real service!
                                     // Provide a test-double instead
        providers: [ { provide: UserService, useValue: userServiceStub } ],
+
+       //No usamos el UserService real! usamos un mock del servicio. Esto se llama Test-double
+        //La filosofia es que no se prueban nunca servicios reales, siempre se usan mocks, fakes porque queremos probar el componente, no el servicio
+        //Probar el servicio real, puede ser una pesadilla (dicho por la guia oficial de Angular!! ) Siempre hay que hacer un mock que satisfaga con el menor codigo posible,
+        // la prueba que queremos hacer
     });
 
     fixture = TestBed.createComponent(WelcomeComponent);
     comp    = fixture.componentInstance;
 
+    //hay 2 formas de coger el servicio, la Que siempre funciona es cogerla a traves del componennt. No obstante casi siempre son las mismas, hay un test que se comprueba que son lo mismo
     // UserService actually injected into the component
     userService = fixture.debugElement.injector.get(UserService);
     componentUserService = userService;
@@ -86,7 +92,7 @@ describe('WelcomeComponent', () => {
       .withContext('"Welcome ..."')
       .toContain('Welcome');
     expect(content)
-      .withContext('expected name')
+      .withContext('expected name') //opcional, failure label
       .toContain('Test User');
   });
 
